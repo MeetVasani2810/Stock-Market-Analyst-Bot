@@ -1,8 +1,9 @@
 services:
-  - type: web
+  - type: worker
     name: stock-market-bot
-    env: python
+    runtime: python
     plan: free
+    pythonVersion: "3.11.10"
     buildCommand: pip install -r requirements.txt
     startCommand: python -m app.main
     autoDeploy: true
