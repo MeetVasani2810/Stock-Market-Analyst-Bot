@@ -10,6 +10,6 @@
 from app.pipeline.fetcher import fetch_market_data
 import json
 
-data = fetch_market_data("BTC/USD", "weekly")
+data = fetch_market_data("BTC/USD")
 
-print(json.dumps(data["macd"][0], indent=2))
+print(f"Fetched {len(data['ohlcv'])} candles for {data['symbol']}")

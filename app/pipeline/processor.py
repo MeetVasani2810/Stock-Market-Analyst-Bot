@@ -27,7 +27,11 @@ def process(market_data):
     delta = df["close"].diff()
     gain = delta.clip(lower=0)
     loss = -delta.clip(upper=0)
-    rs = gain.rolling(14).mean() / loss.rolling(14).mean()
+    avg_gain = gain.rolling(window=14).mean()
+    avg_loss = loss.rolling(window=14).mean()
+    
+    # Avoid division by zero
+    rs = avg_gain / avg_loss.replace(0, 1e-10)
     df["rsi"] = 100 - (100 / (1 + rs))
 
     # ---- MACD ----

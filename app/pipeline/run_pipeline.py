@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 def run_pipeline(trigger="manual"):
     """
@@ -6,7 +6,7 @@ def run_pipeline(trigger="manual"):
     Real analysis is triggered via Telegram /analyze command.
     """
 
-    start_time = datetime.utcnow()
+    start_time = datetime.now(timezone.utc)
 
     print("========== PIPELINE START ==========")
     print(f"Trigger     : {trigger}")
@@ -15,7 +15,7 @@ def run_pipeline(trigger="manual"):
     # Intentionally empty for now
     # Real execution happens via /analyze
 
-    end_time = datetime.utcnow()
+    end_time = datetime.now(timezone.utc)
     print(f"Ended at    : {end_time}")
     print("=========== PIPELINE END ===========")
 

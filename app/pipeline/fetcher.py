@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime
+from datetime import datetime, timezone
 from app.config import TWELVE_DATA_API_KEY
 
 BASE_URL = "https://api.twelvedata.com"
@@ -23,5 +23,5 @@ def fetch_market_data(symbol: str):
         "symbol": symbol,
         "interval": "1week",
         "ohlcv": list(reversed(data["values"])),
-        "fetched_at": datetime.utcnow().isoformat(),
+        "fetched_at": datetime.now(timezone.utc).isoformat(),
     }
