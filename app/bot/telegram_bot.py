@@ -173,7 +173,23 @@ def start_bot():
     app.add_handler(CallbackQueryHandler(button_handler))
 
     print("🤖 Telegram bot started")
-    app.run_polling()
+    
+    from app.config import ENV, WEBHOOK_URL, PORT
+
+    if ENV == "production" or WEBHOOK_URL:
+        if not WEBHOOK_URL:
+             raise RuntimeError("WEBHOOK_URL is required for production/webhook mode")
+        
+        print(f"🚀 Starting Webhook on port {PORT}")
+        app.run_webhook(
+            listen="0.0.0.0",
+            port=PORT,
+            url_path=BOT_TOKEN,
+            webhook_url=f"{WEBHOOK_URL}/{BOT_TOKEN}"
+        )
+    else:
+        print("🔁 Starting Polling (Dev Mode)")
+        app.run_polling()
 
 
 

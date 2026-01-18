@@ -8,6 +8,8 @@ TWELVE_DATA_API_KEY = os.getenv("TWELVE_DATA_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 ENV = os.getenv("ENV", "development")
+WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+PORT = int(os.getenv("PORT", "10000"))
 
 def validate_config():
     if not BOT_TOKEN:
