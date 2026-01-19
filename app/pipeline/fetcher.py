@@ -4,10 +4,10 @@ from app.config import TWELVE_DATA_API_KEY
 
 BASE_URL = "https://api.twelvedata.com"
 
-def fetch_market_data(symbol: str):
+def fetch_market_data(symbol: str, interval: str = "1day"):
     params = {
         "symbol": symbol,
-        "interval": "1week",
+        "interval": interval,
         "outputsize": 150,
         "apikey": TWELVE_DATA_API_KEY,
     }
@@ -17,11 +17,11 @@ def fetch_market_data(symbol: str):
     data = r.json()
 
     if "values" not in data:
-        raise RuntimeError(f"Invalid data for {symbol}")
+        raise RuntimeError(f"Invalid data for {symbol} (interval: {interval})")
 
     return {
         "symbol": symbol,
-        "interval": "1week",
+        "interval": interval,
         "ohlcv": list(reversed(data["values"])),
         "fetched_at": datetime.now(timezone.utc).isoformat(),
     }

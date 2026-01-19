@@ -1,8 +1,9 @@
 from app.ai.openai_client import ask_llm
 
-def run_fundamental_analysis(stock_name: str, exchange: str):
+def run_fundamental_analysis(stock_name: str, exchange: str, timeframe: str = "1day"):
     prompt = f"""
 Perform a detailed fundamental analysis of {stock_name} listed on {exchange}
+Focus on the relevance for a '{timeframe}' trading horizon (if applicable).
 using the latest publicly available financial data.
 
 Structure the response with clear headings and bullet points.
